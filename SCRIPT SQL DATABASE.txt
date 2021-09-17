@@ -1,24 +1,130 @@
-CREATE TABLE usuarios (
-id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+CREATE TABLE usuarios(
+id INT AUTO_INCREMENT,
 nombre VARCHAR(50) NOT NULL,
-email VARCHAR(100) NOT NULL
+email VARCHAR(100) NOT NULL,
+PRIMARY KEY (id)
 );
 CREATE TABLE notas (
-id INT NOT NULL AUTO_INCREMENT,
+id INT AUTO_INCREMENT,
 titulo VARCHAR(100),
-id_usuario INT NOT NULL,
-id_categoria INT not NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+id_usuario INT,
+id_categoria INT,
 fecha_creacion DATETIME NOT NULL,
 ultima_modificacion DATETIME NOT NULL,
 descripcion TEXT NULL,
-eliminar TINYINT NOT NULL
+eliminar TINYINT NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 CREATE TABLE categorias (
-id INT NOT NULL AUTO_INCREMENT,
+id INT AUTO_INCREMENT,
 nombre VARCHAR(100) NOT NULL,
-id_nota INT not null,
+id_nota INT,
 PRIMARY KEY (id),
 FOREIGN KEY (id_nota) REFERENCES notas(id)
-)
+);
+
+INSERT INTO usuarios
+VALUES (1, 'Juan', 'juan@mail.com');
+INSERT INTO usuarios
+VALUES (2, 'Pedro', 'pedro@mail.com');
+INSERT INTO usuarios
+VALUES (3, 'Javier', 'javier@mail.com');
+INSERT INTO usuarios
+VALUES (4, 'Gonzalo', 'gonzalo@mail.com');
+INSERT INTO usuarios
+VALUES (5, 'Leonel', 'leonel@mail.com');
+INSERT INTO usuarios
+VALUES (6, 'Aldo', 'aldo@mail.com');
+INSERT INTO usuarios
+VALUES (7, 'Leandro', 'leandro@mail.com');
+INSERT INTO usuarios
+VALUES (8, 'Bernardo', 'bernardo@mail.com');
+INSERT INTO usuarios
+VALUES (9, 'Matias', 'matias@mail.com');
+INSERT INTO usuarios
+VALUES (10, 'Francisco', 'francisco@mail.com');
+
+INSERT INTO categorias (id, nombre)
+VALUES (1, 'Blues');
+INSERT INTO categorias (id, nombre)
+VALUES (2, 'Rock');
+INSERT INTO categorias (id, nombre)
+VALUES (3, 'Soul');
+INSERT INTO categorias (id, nombre)
+VALUES (4, 'Funk');
+INSERT INTO categorias (id, nombre)
+VALUES (5, 'House');
+INSERT INTO categorias (id, nombre)
+VALUES (6, 'Rap');
+INSERT INTO categorias (id, nombre)
+VALUES (7, 'Pop');
+INSERT INTO categorias (id, nombre)
+VALUES (8, 'Metal');
+INSERT INTO categorias (id, nombre)
+VALUES (9, 'Trance');
+INSERT INTO categorias (id, nombre)
+VALUES (10, 'Techno');
+
+INSERT INTO notas
+VALUES (1, 'titulo 01', 3, 6, '2015-02-03 08:03:05', '2015-03-04 09:04:06', 'Descripcion 01', 0);
+INSERT INTO notas
+VALUES (2, 'titulo 02', 10, 4, '2016-12-10 08:03:05', '2017-02-05 09:04:06', 'Descripcion 02', 0);
+INSERT INTO notas
+VALUES (3, 'titulo 03', 2, 2, '2014-10-03 08:27:05', '2015-01-02 09:04:06', 'Descripcion 03', 0);
+INSERT INTO notas
+VALUES (4, 'titulo 04', 3, 1, '2017-08-04 08:03:05', '2018-07-06 09:04:06', 'Descripcion 04', 0);
+INSERT INTO notas
+VALUES (5, 'titulo 05', 5, 3, '2011-06-22 08:03:05', '2012-11-08 09:08:06', 'Descripcion 05', 0);
+INSERT INTO notas
+VALUES (6, 'titulo 06', 9, 6, '2012-11-14 08:03:05', '2015-08-11 09:04:06', 'Descripcion 06', 0);
+INSERT INTO notas
+VALUES (7, 'titulo 07', 6, 8, '2018-01-05 08:03:05', '2019-05-23 09:04:06', 'Descripcion 07', 0);
+INSERT INTO notas
+VALUES (8, 'titulo 08', 8, 10, '2009-06-09 08:03:05', '2010-07-04 09:04:06', 'Descripcion 08', 0);
+INSERT INTO notas
+VALUES (9, 'titulo 09', 3, 5, '2013-03-02 08:03:05', '2015-11-04 09:04:36', 'Descripcion 09', 1);
+INSERT INTO notas
+VALUES (10, 'titulo 10', 1, 2, '2015-02-06 08:03:05', '2017-09-04 09:04:06', 'Descripcion 10', 0);
+
+UPDATE categorias
+SET id_nota = 3
+WHERE id = 1;
+
+UPDATE categorias
+SET id_nota = 6
+WHERE id = 2;
+
+UPDATE categorias
+SET id_nota = 2
+WHERE id = 3;
+
+UPDATE categorias
+SET id_nota = 10
+WHERE id = 4;
+
+UPDATE categorias
+SET id_nota = 6
+WHERE id = 5;
+
+UPDATE categorias
+SET id_nota = 7
+WHERE id = 6;
+
+UPDATE categorias
+SET id_nota = 9
+WHERE id = 7;
+
+UPDATE categorias
+SET id_nota = 1
+WHERE id = 8;
+
+UPDATE categorias
+SET id_nota = 6
+WHERE id = 9;
+
+UPDATE categorias
+SET id_nota = 4
+WHERE id = 10;
+
+ALTER TABLE notas ADD FOREIGN KEY (id_categoria) REFERENCES categorias(id);
